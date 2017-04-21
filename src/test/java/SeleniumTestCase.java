@@ -5,6 +5,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  * 
@@ -15,12 +17,17 @@ import org.junit.Test;
  *
  */
 public class SeleniumTestCase {
-
+	
+	private WebDriver driver;
+	
+	private String url = "http://www.google.com/";
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		System.setProperty("webdriver.chrome.driver", "./libs/chromedriver.exe");
 	}
 
 	/**
@@ -35,6 +42,8 @@ public class SeleniumTestCase {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		driver = new ChromeDriver();
+		driver.get(url);
 	}
 
 	/**
@@ -46,7 +55,7 @@ public class SeleniumTestCase {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		
 	}
 
 }
