@@ -1,3 +1,4 @@
+package com.cdoss.selenium.template;
 import static org.junit.Assert.*;
 
 import org.junit.After;
