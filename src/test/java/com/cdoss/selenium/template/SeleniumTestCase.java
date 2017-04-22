@@ -1,13 +1,14 @@
 package com.cdoss.selenium.template;
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import ru.stqa.selenium.factory.WebDriverPool;
 
 /**
  * 
@@ -28,7 +29,10 @@ public class SeleniumTestCase {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "./libs/chromedriver.exe");
+		SystemProperty props = new SystemProperty();
+		props.setSystemProperty(SeleniumTestConstants.BROWSER_CHROME);
+		props.setSystemProperty(SeleniumTestConstants.BROWSER_FIREFOX);
+		props.setSystemProperty(SeleniumTestConstants.BROWSER_IE);
 	}
 
 	/**
@@ -43,7 +47,8 @@ public class SeleniumTestCase {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		driver = new ChromeDriver();
+		Capabilities chrome = DesiredCapabilities.chrome();
+		driver = WebDriverPool.DEFAULT.getDriver(chrome);
 		driver.get(url);
 	}
 
@@ -52,6 +57,7 @@ public class SeleniumTestCase {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		WebDriverPool.DEFAULT.dismissAll();
 	}
 
 	@Test
